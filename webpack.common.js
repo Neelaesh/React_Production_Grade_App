@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const publicPath = require("./publicPath");
 const { cache } = require("react");
-const loader = require("mini-css-extract-plugin/types/loader");
 
 module.exports = () => {
   return {
@@ -110,10 +109,6 @@ module.exports = () => {
         extensions: ["ts", "tsx"],
         emitWarning: true,
         failOnError: false,
-      }),
-      new loader.MiniCssExtractPlugin({
-        filename: "[name].css",
-        chunkFilename: "[id].css",
       }),
     ],
   };
