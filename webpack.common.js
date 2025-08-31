@@ -2,7 +2,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const publicPath = require("./publicPath");
-const { cache } = require("react");
 
 module.exports = () => {
   return {
@@ -32,7 +31,7 @@ module.exports = () => {
       rules: [
         {
           test: /\.(ts|tsx)$/, // Match TypeScript files
-          exclude: /node_modules/, // Exclude node_modules from processing
+          //exclude: /node_modules/, // Exclude node_modules from processing
           include: path.resolve(__dirname, "src"), // Include only the src directory
           loader: "ts-loader", // Use ts-loader for TypeScript files
           options: {
@@ -45,15 +44,13 @@ module.exports = () => {
         {
           enforce: "pre", // Run this rule before others
           test: /\.js$/, // Match JavaScript files
-          exclude: /node_modules/, // Exclude node_modules from processing
+          //exclude: /node_modules/, // Exclude node_modules from processing
           include: path.resolve(__dirname, "src"), // Include only the src directory
           loader: "source-map-loader", // Use source-map-loader to extract source maps
         },
         {
           test: /\.css$/, // Match CSS files
-          exclude: /node_modules/, // Exclude node_modules from processing
-          include: path.resolve(__dirname, "src"), // Include only the src directory
-          use: ["style-loader", "css-loader", "postcss-loader"], // Use style-loader, css-loader, and postcss-loader for CSS files
+          use: ["style-loader", "css-loader"], // Use style-loader and css-loader for CSS files
           sideEffects: true, // Indicate that CSS files have side effects
         },
       ],
@@ -62,7 +59,7 @@ module.exports = () => {
       splitChunks: {
         chunks: "all", // Split all chunks (async and initial)
         minSize: 20000, // Minimum size for a chunk to be generated
-        maxSize: 0, // No maximum size for chunks
+        maxSize: 100000, // Maximum size for chunks
         minChunks: 1, // Minimum number of chunks that must share a module before splitting
         cacheGroups: {
           vendors: {

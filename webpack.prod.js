@@ -35,4 +35,4 @@ const prodConfig = () => {
   };
 };
 
-module.exports = (env) => merge(commonConfig(), prodConfig());
+module.exports = (env) => merge(commonConfig(), prodConfig(env));
